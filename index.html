@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coffea Shop Chartea</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <!-- Include Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <style>
+        .bg-tea-background {
+            background: #8B4513;
+
+        }
+
+        nav {
+            z-index: 2;
+        }
+
+        #sidebar {
+            z-index: 2;
+        }
+
+        /* Ensure map container takes full width and height */
+        #map {
+            height: 400px;
+            /* Adjust height */
+            width: 100%;
+            z-index: 0;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navbar -->
+    <nav style="background-color: #c96822;" class="text-white shadow-lg fixed w-full z-50">
+        <div class="container mx-auto flex items-center justify-between py-4 px-6">
+            <a href="#" class="text-2xl font-semibold">Coffea Shop Chartea</a>
+            <!-- Menu untuk layar besar -->
+            <ul class="hidden md:flex space-x-8">
+                <li><a href="#" class=" transition duration-300">Home</a></li>
+                <li><a href="#menu" class="transition duration-300">Menu</a></li>
+                <li><a href="#alamat" class=" transition duration-300">Alamat</a></li>
+                <li><a href="#kontak" class=" transition duration-300">Kontak</a></li>
+            </ul>
+            <!-- Tombol Hamburger untuk layar kecil -->
+            <button id="hamburger-btn" class="md:hidden text-[#D2B48C] focus:outline-none">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Sidebar Menu -->
+    <div style="background-color: #c96822;" id="sidebar"
+        class="fixed inset-y-0 left-0 w-64  text-white transform -translate-x-full transition-transform duration-300 ease-in-out">
+        <div class="flex items-center justify-between px-6 py-4">
+            <!-- Tombol Close di bagian atas sidebar -->
+            <button id="close-btn" class="text-teal-500 focus:outline-none">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </button>
+        </div>
+        <ul class="flex flex-col space-y-6 px-6 mt-4">
+            <li><a href="#home" class="hover:text-teal-400 transition duration-300 close-sidebar">Home</a></li>
+            <li><a href="#menu" class="hover:text-teal-400 transition duration-300 close-sidebar">Menu</a></li>
+            <li><a href="#alamat" class="hover:text-teal-400 transition duration-300 close-sidebar">Alamat</a></li>
+            <li><a href="#kontak" class="hover:text-teal-400 transition duration-300 close-sidebar">Kontak</a></li>
+        </ul>
+    </div>
+
+    <script>
+        // Mengontrol tombol hamburger dan sidebar
+        const hamburgerBtn = document.getElementById('hamburger-btn'); // Pastikan Anda memiliki tombol hamburger di HTML
+        const sidebar = document.getElementById('sidebar');
+        const closeBtn = document.getElementById('close-btn');
+
+        // Buka sidebar saat tombol hamburger diklik
+        hamburgerBtn.addEventListener('click', () => {
+            sidebar.classList.remove('-translate-x-full'); // Menghilangkan kelas yang menyembunyikan sidebar
+        });
+
+        // Tutup sidebar saat tombol close diklik
+        closeBtn.addEventListener('click', () => {
+            sidebar.classList.add('-translate-x-full'); // Menambahkan kelas untuk menyembunyikan sidebar
+        });
+
+        // Tutup sidebar saat item menu diklik
+        const closeSidebarLinks = document.querySelectorAll('.close-sidebar');
+        closeSidebarLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                sidebar.classList.add('-translate-x-full'); // Menambahkan kelas untuk menyembunyikan sidebar
+            });
+        });
+    </script>
+
+
+    <!-- Hero Section -->
+    <section class=" text-center px-6 py-12 h-screen flex items-center justify-center">
+        <div>
+            <h1 style="color: #c96822;" class="text-5xl font-extrabold mb-6">Selamat Datang di Coffea Shop Chartea</h1>
+            <p style="color: #c96822;" class="text-xl text-gray-600 mb-8">Nikmati minuman segar dan lezat kami yang akan
+                menyegarkan hari Anda!
+            </p>
+        </div>
+    </section>
+
+    <!-- Menu Section -->
+    <section id="menu" class="h-auto bg-tea-background py-12">
+        <div class="container mx-auto text-center mb-12">
+            <h2 class="text-3xl font-bold text-white mb-8">Menu Kami</h2>
+        </div>
+
+        <!-- Menu Grid -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-8 px-6">
+            <!-- Tea Series -->
+            <div class="bg-white rounded-lg shadow-lg p-6 hover:scale-105 transition duration-300">
+                <h3 class="text-2xl text-center font-semibold text-teal-600 mb-4">Tea Series</h3>
+                <ul class="space-y-2 text-center text-gray-700">
+                    <li>Thaitea: 10k / 15k</li>
+                    <li>Greentea: 10k / 15k</li>
+                    <li>Thaitea Milo: 12k / 17k</li>
+                    <li>Matcha Tea: 10k / 15k</li>
+                </ul>
+            </div>
+
+            <!-- Coffee Series -->
+            <div class="bg-white rounded-lg shadow-lg p-6 hover:scale-105 transition duration-300">
+                <h3 class="text-2xl text-center font-semibold text-teal-600 mb-4">Coffee Series</h3>
+                <ul class="space-y-2 text-center text-gray-700">
+                    <li>Vanillalate: 10k / 15k</li>
+                    <li>Cappucino: 10k / 15k</li>
+                    <li>Moccacino: 10k / 15k</li>
+                    <li>Frappuccino: 13k / 18k</li>
+                    <li>Caramel Latte: 13k / 18k</li>
+                    <li>Caramel Macchiato: 13k / 18k</li>
+                </ul>
+            </div>
+
+            <!-- Choco Series -->
+            <div class="bg-white rounded-lg shadow-lg p-6 hover:scale-105 transition duration-300">
+                <h3 class="text-2xl text-center font-semibold text-teal-600 mb-4">Choco Series</h3>
+                <ul class="space-y-2 text-center text-gray-700">
+                    <li>Choco Dark: 10k / 15k</li>
+                    <li>Milo: 10k / 15k</li>
+                    <li>Milo Lava: 12k / 17k</li>
+                </ul>
+            </div>
+
+            <!-- Bar -->
+            <div class="bg-white rounded-lg shadow-lg p-6 hover:scale-105 transition duration-300">
+                <h3 class="text-2xl text-center font-semibold text-teal-600 mb-4">Bar</h3>
+                <ul class="space-y-2 text-center text-gray-700">
+                    <li>Hazelnut: 10k / 15k</li>
+                    <li>Orelnut: 10k / 15k</li>
+                    <li>Choco Belgian: 13k / 18k</li>
+                    <li>Choco Nutella: 15k / 20k</li>
+                    <li>Oreo Cookies: 13k / 18k</li>
+                </ul>
+            </div>
+
+            <!-- Fruit Series -->
+            <div class="bg-white rounded-lg shadow-lg p-6 hover:scale-105 transition duration-300">
+                <h3 class="text-2xl text-center font-semibold text-teal-600 mb-4">Fruit Series</h3>
+                <ul class="space-y-2 text-center text-gray-700">
+                    <li>Strawberry: 10k / 15k</li>
+                    <li>Mango: 13k / 18k</li>
+                    <li>Taro: 10k / 15k</li>
+                    <li>Lemon: 10k / 15k</li>
+                    <li>Strawberry Mil: 12k / 15k</li>
+                </ul>
+            </div>
+
+            <!-- Es Kopi Susu -->
+            <div class="bg-white rounded-lg shadow-lg p-6 hover:scale-105 transition duration-300">
+                <h3 class="text-2xl text-center font-semibold text-teal-600 mb-4">Es Kopi Susu</h3>
+                <ul class="space-y-2 text-center text-gray-700">
+                    <li>Small: 10k / 15k</li>
+                    <li>Large: 20k / 25k</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+
+    <section id="alamat" class="py-16 bg-gray-100">
+        <div class="text-center mb-12">
+            <h2 style="color: #c96822;" class="text-3xl font-bold  mb-8">Alamat Kami</h2>
+        </div>
+
+        <div class="flex justify-center">
+            <!-- Map Container -->
+            <div id="map" class="w-full h-96 md:h-128 lg:h-160 max-w-screen-lg"></div>
+        </div>
+    </section>
+
+    <!-- Kontak Section -->
+    <section id="kontak" class="h-screen bg-tea-background">
+        <div class="container mx-auto text-center mb-12">
+            <h2 class="text-3xl font-bold text-white mb-8">Kontak Kami</h2>
+        </div>
+        <div class="flex justify-center ">
+            <form action="#" method="post" class="w-full max-w-lg bg-white rounded-lg shadow-lg p-8">
+                <div class="mb-6">
+                    <label for="name" class="block text-gray-700 font-bold mb-2">Nama</label>
+                    <input type="text" id="name" name="name" required
+                        class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500">
+                </div>
+                <div class="mb-6">
+                    <label for="email" class="block text-gray-700 font-bold mb-2">Email</label>
+                    <input type="email" id="email" name="email" required
+                        class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500">
+                </div>
+                <div class="mb-6">
+                    <label for="message" class="block text-gray-700 font-bold mb-2">Pesan</label>
+                    <textarea id="message" name="message" rows="4" required
+                        class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"></textarea>
+                </div>
+                <button type="submit"
+                    class="w-full bg-tea-background hover:bg-teal-600 text-white font-bold py-3 rounded-lg transition duration-300">Kirim
+                    Pesan</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer style="background-color: #c96822;" class="text-white py-4 w-full fixed bottom-0">
+        <div class="container mx-auto text-center">
+            <p>&copy; 2023 Coffea Shop Chartea. All rights reserved.</p>
+        </div>
+    </footer>
+
+
+    <!-- Include Leaflet JS -->
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            var map = L.map('map').setView([-6.1147023, 120.4601010], 18);
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            }).addTo(map);
+            const umkmData = {
+                name: "Coffea Shop Chartea",
+                rating: "4,4",
+                reviews: 5,
+                category: "Kedai Kopi",
+                buka: "---",
+                alamat: "jl.KH. Hayyung 92812",
+                phone: "--",
+                coords: [-6.1147023, 120.4601010],
+            };
+
+            const marker = L.marker(umkmData.coords).addTo(map);
+
+            // Menambahkan tooltip permanen pada marker
+            marker.bindTooltip(umkmData.name, {
+                permanent: true,
+                direction: "top",
+                className: "marker-tooltip",
+            });
+
+            marker.bindPopup(`
+                <div class="popup-container">
+                    <div class="popup-header">${umkmData.name}</div>
+                    <div class="popup-rating">⭐ ${umkmData.rating} <span>(${umkmData.reviews})</span></div>
+                    <div class="popup-category">${umkmData.category}</div>
+                    <div class="popup-address"><i class="fas fa-map-marker-alt">Alamat = </i> ${umkmData.alamat}</div>
+                    <div class="popup-contact"><i class="fas fa-phone-alt">Nomor Telepon = </i> ${umkmData.phone}</div>
+                    <div class="popup-contact"><i class="fas fa-phone-alt">Jam Buka = </i> ${umkmData.buka}</div>
+                </div>
+            `);
+
+            fetch("./jalanBentengAnjay.geojson")
+                .then((response) => response.json())
+                .then((geojsonData) => {
+                    L.geoJSON(geojsonData, {
+                        style: {
+                            color: "#000",
+                            weight: 3,
+                            opacity: 1,
+                        },
+                    }).addTo(map);
+                })
+                .catch((error) =>
+                    console.error("Error loading jalan GeoJSON:", error)
+                );
+
+            fetch("./kecamatanBenteng.geojson")
+                .then((response) => response.json())
+                .then((geojsonData) => {
+                    L.geoJSON(geojsonData, {
+                        style: {
+                            color: "#000",
+                            weight: 1.5,
+                            opacity: 0.8,
+                            fillColor: "#000",
+                            fillOpacity: 0.5,
+                        },
+                    }).addTo(map);
+                })
+                .catch((error) =>
+                    console.error("Error loading kecamatanBenteng GeoJSON:", error)
+                );
+        });
+    </script>
+
+</body>
+
+</html>
