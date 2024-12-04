@@ -14,15 +14,6 @@
             background: #8B4513;
 
         }
-
-        nav {
-            z-index: 2;
-        }
-
-        #sidebar {
-            z-index: 2;
-        }
-
         /* Ensure map container takes full width and height */
         #map {
             height: 400px;
@@ -34,73 +25,6 @@
 </head>
 
 <body>
-
-    <!-- Navbar -->
-    <nav style="background-color: #c96822;" class="text-white shadow-lg fixed w-full z-50">
-        <div class="container mx-auto flex items-center justify-between py-4 px-6">
-            <a href="#" class="text-2xl font-semibold">Coffea Shop Chartea</a>
-            <!-- Menu untuk layar besar -->
-            <ul class="hidden md:flex space-x-8">
-                <li><a href="#" class=" transition duration-300">Home</a></li>
-                <li><a href="#menu" class="transition duration-300">Menu</a></li>
-                <li><a href="#alamat" class=" transition duration-300">Alamat</a></li>
-                <li><a href="#kontak" class=" transition duration-300">Kontak</a></li>
-            </ul>
-            <!-- Tombol Hamburger untuk layar kecil -->
-            <button id="hamburger-btn" class="md:hidden text-[#D2B48C] focus:outline-none">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
-                    stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-                </svg>
-            </button>
-        </div>
-    </nav>
-
-    <!-- Sidebar Menu -->
-    <div style="background-color: #c96822;" id="sidebar"
-        class="fixed inset-y-0 left-0 w-64  text-white transform -translate-x-full transition-transform duration-300 ease-in-out">
-        <div class="flex items-center justify-between px-6 py-4">
-            <!-- Tombol Close di bagian atas sidebar -->
-            <button id="close-btn" class="text-teal-500 focus:outline-none">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
-                    stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                </svg>
-            </button>
-        </div>
-        <ul class="flex flex-col space-y-6 px-6 mt-4">
-            <li><a href="#home" class="hover:text-teal-400 transition duration-300 close-sidebar">Home</a></li>
-            <li><a href="#menu" class="hover:text-teal-400 transition duration-300 close-sidebar">Menu</a></li>
-            <li><a href="#alamat" class="hover:text-teal-400 transition duration-300 close-sidebar">Alamat</a></li>
-            <li><a href="#kontak" class="hover:text-teal-400 transition duration-300 close-sidebar">Kontak</a></li>
-        </ul>
-    </div>
-
-    <script>
-        // Mengontrol tombol hamburger dan sidebar
-        const hamburgerBtn = document.getElementById('hamburger-btn'); // Pastikan Anda memiliki tombol hamburger di HTML
-        const sidebar = document.getElementById('sidebar');
-        const closeBtn = document.getElementById('close-btn');
-
-        // Buka sidebar saat tombol hamburger diklik
-        hamburgerBtn.addEventListener('click', () => {
-            sidebar.classList.remove('-translate-x-full'); // Menghilangkan kelas yang menyembunyikan sidebar
-        });
-
-        // Tutup sidebar saat tombol close diklik
-        closeBtn.addEventListener('click', () => {
-            sidebar.classList.add('-translate-x-full'); // Menambahkan kelas untuk menyembunyikan sidebar
-        });
-
-        // Tutup sidebar saat item menu diklik
-        const closeSidebarLinks = document.querySelectorAll('.close-sidebar');
-        closeSidebarLinks.forEach(link => {
-            link.addEventListener('click', () => {
-                sidebar.classList.add('-translate-x-full'); // Menambahkan kelas untuk menyembunyikan sidebar
-            });
-        });
-    </script>
-
 
     <!-- Hero Section -->
     <section class=" text-center px-6 py-12 h-screen flex items-center justify-center">
