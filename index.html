@@ -175,6 +175,23 @@
     <script>
         document.addEventListener("DOMContentLoaded", function () {
             var map = L.map('map').setView([-6.1147023, 120.4601010], 18);
+              // Gaya default untuk GeoJSON
+            const defaultStyle1 = {
+                color: "#f0f0f0",
+                weight: 1.5,
+                opacity: 0.8,
+                fillColor: "#45F450",
+                fillOpacity: 1,
+            };
+
+            const defaultStyle2 = {
+                color: "#f0f0f0",
+                weight: 1.5,
+                opacity: 0.8,
+                fillColor: "#45F450",
+                fillOpacity: 1,
+            };
+            
             const umkmData = {
                 name: "Coffea Shop Chartea",
                 rating: "4,4",
@@ -206,37 +223,55 @@
                 </div>
             `);
 
-            fetch("./jalanBentengAnjay.geojson")
-                .then((response) => response.json())
-                .then((geojsonData) => {
-                    L.geoJSON(geojsonData, {
-                        style: {
-                            color: "#000",
-                            weight: 3,
-                            opacity: 1,
-                        },
-                    }).addTo(map);
-                })
-                .catch((error) =>
-                    console.error("Error loading jalan GeoJSON:", error)
-                );
+           // Fungsi untuk memuat GeoJSON ke peta
+            function loadGeoJSON(url, styleOptions) {
+                fetch(url)
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error(`Gagal memuat ${url}: ${response.status}`);
+                        }
+                        return response.json();
+                    })
+                    .then(geojsonData => {
+                        L.geoJSON(geojsonData, {
+                            style: styleOptions,
+                            onEachFeature: function (feature, layer) {
+                                if (feature.properties && feature.properties.nama) {
+                                    layer.bindPopup(`${feature.properties.nama}`);
+                                }
+                            },
+                        }).addTo(map);
+                    })
+                    .catch(error => console.error(`Kesalahan saat memuat ${url}:`, error));
+            }
 
-            fetch("./kecamatanBenteng.geojson")
-                .then((response) => response.json())
-                .then((geojsonData) => {
-                    L.geoJSON(geojsonData, {
-                        style: {
-                            color: "#000",
-                            weight: 1.5,
-                            opacity: 0.8,
-                            fillColor: "#000",
-                            fillOpacity: 0.5,
-                        },
-                    }).addTo(map);
-                })
-                .catch((error) =>
-                    console.error("Error loading kecamatanBenteng GeoJSON:", error)
-                );
+            // Memuat GeoJSON dengan gaya default
+            loadGeoJSON("./sekolah.geojson", defaultStyle1);
+            loadGeoJSON("./mesjid.geojson", defaultStyle2);
+
+            // GeoJSON dengan gaya khusus
+            const geojsonFiles = [
+                { url: "./BentengUtara.geojson", style: { color: "#f0f0f0", weight: 1.5, opacity: 0.8, fillColor: "red", fillOpacity: 0.2 } },
+                { url: "./BentengPusat.geojson", style: { color: "#f0f0f0", weight: 1.5, opacity: 0.8, fillColor: "yellow", fillOpacity: 0.2 } },
+                { url: "./BentengSelatan.geojson", style: { color: "#f0f0f0", weight: 1.5, opacity: 0.8, fillColor: "green", fillOpacity: 0.2 } },
+                { url: "./jalanBentengAnjay.geojson", style: { color: "#333", weight: 3, opacity: 1 } }
+            ];
+
+            // Memuat semua file GeoJSON dalam array
+            geojsonFiles.forEach(file => {
+                loadGeoJSON(file.url, file.style);
+            });
+
+            // Menambahkan kontrol layer (opsional)
+            const baseMaps = {
+                "OpenStreetMap": L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png')
+            };
+
+            const overlayMaps = {
+                "UMKM Marker": marker
+            };
+
+            L.control.layers(baseMaps, overlayMaps).addTo(map);
         });
     </script>
 
