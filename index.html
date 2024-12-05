@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Coffea Shop Chartea</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <!-- Include Leaflet CSS -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
     <style>
@@ -15,21 +15,55 @@
         body {
             font-family: "Lacquer", system-ui;
         }
+
         .bg-tea-background {
             background: #8B4513;
 
-        }
-        /* Ensure map container takes full width and height */
-        #map {
-            height: 400px;
-            /* Adjust height */
-            width: 100%;
-            z-index: 0;
         }
     </style>
 </head>
 
 <body>
+    <!-- Navbar -->
+    <nav class="bg-tea-background p-4 shadow-lg fixed top-0 w-full">
+        <div class="container mx-auto flex items-center justify-between">
+            <!-- Logo -->
+            <a href="#" class="text-white text-2xl font-bold">Coffea Shop Chartea</a>
+
+            <!-- Menu -->
+            <div class="hidden md:flex space-x-6">
+                <a href="./" class="text-white hover:text-gray-300 transition">Home</a>
+                <a href="./menu.html" class="text-white hover:text-gray-300 transition">Menu</a>
+                <a href="./alamat.html" class="text-white hover:text-gray-300 transition">Alamat</a>
+                <a href="./kontak.html" class="text-white hover:text-gray-300 transition">Kontak</a>
+            </div>
+
+            <!-- Mobile Menu Button -->
+            <button id="mobile-menu-button" class="md:hidden text-white focus:outline-none">
+                <i class="fas fa-bars fa-lg"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden flex flex-col bg-tea-background p-4 space-y-4">
+            <a href="./" class="text-white hover:text-gray-300 transition">Home</a>
+            <a href="./menu.html" class="text-white hover:text-gray-300 transition">Menu</a>
+            <a href="./alamat.html" class="text-white hover:text-gray-300 transition">Alamat</a>
+            <a href="./kontak.html" class="text-white hover:text-gray-300 transition">Kontak</a>
+        </div>
+    </nav>
+
+
+    <script>
+        // Mobile menu toggle script
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+    </script>
+
 
     <!-- Hero Section -->
     <section class=" text-center px-6 py-12 h-screen flex items-center justify-center">
@@ -41,235 +75,10 @@
         </div>
     </section>
 
-    <!-- Menu Section -->
-    <section id="menu" class="h-auto bg-tea-background py-12">
-        <div class="container mx-auto text-center mb-12">
-            <h2 class="text-3xl font-bold text-white mb-8">Menu Kami</h2>
-        </div>
-
-        <!-- Menu Grid -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-8 px-6">
-            <!-- Tea Series -->
-            <div class="bg-white rounded-lg shadow-lg p-6 hover:scale-105 transition duration-300">
-                <h3 class="text-2xl text-center font-semibold text-teal-600 mb-4">Tea Series</h3>
-                <ul class="space-y-2 text-center text-gray-700">
-                    <li>Thaitea: 10k / 15k</li>
-                    <li>Greentea: 10k / 15k</li>
-                    <li>Thaitea Milo: 12k / 17k</li>
-                    <li>Matcha Tea: 10k / 15k</li>
-                </ul>
-            </div>
-
-            <!-- Coffee Series -->
-            <div class="bg-white rounded-lg shadow-lg p-6 hover:scale-105 transition duration-300">
-                <h3 class="text-2xl text-center font-semibold text-teal-600 mb-4">Coffee Series</h3>
-                <ul class="space-y-2 text-center text-gray-700">
-                    <li>Vanillalate: 10k / 15k</li>
-                    <li>Cappucino: 10k / 15k</li>
-                    <li>Moccacino: 10k / 15k</li>
-                    <li>Frappuccino: 13k / 18k</li>
-                    <li>Caramel Latte: 13k / 18k</li>
-                    <li>Caramel Macchiato: 13k / 18k</li>
-                </ul>
-            </div>
-
-            <!-- Choco Series -->
-            <div class="bg-white rounded-lg shadow-lg p-6 hover:scale-105 transition duration-300">
-                <h3 class="text-2xl text-center font-semibold text-teal-600 mb-4">Choco Series</h3>
-                <ul class="space-y-2 text-center text-gray-700">
-                    <li>Choco Dark: 10k / 15k</li>
-                    <li>Milo: 10k / 15k</li>
-                    <li>Milo Lava: 12k / 17k</li>
-                </ul>
-            </div>
-
-            <!-- Bar -->
-            <div class="bg-white rounded-lg shadow-lg p-6 hover:scale-105 transition duration-300">
-                <h3 class="text-2xl text-center font-semibold text-teal-600 mb-4">Bar</h3>
-                <ul class="space-y-2 text-center text-gray-700">
-                    <li>Hazelnut: 10k / 15k</li>
-                    <li>Orelnut: 10k / 15k</li>
-                    <li>Choco Belgian: 13k / 18k</li>
-                    <li>Choco Nutella: 15k / 20k</li>
-                    <li>Oreo Cookies: 13k / 18k</li>
-                </ul>
-            </div>
-
-            <!-- Fruit Series -->
-            <div class="bg-white rounded-lg shadow-lg p-6 hover:scale-105 transition duration-300">
-                <h3 class="text-2xl text-center font-semibold text-teal-600 mb-4">Fruit Series</h3>
-                <ul class="space-y-2 text-center text-gray-700">
-                    <li>Strawberry: 10k / 15k</li>
-                    <li>Mango: 13k / 18k</li>
-                    <li>Taro: 10k / 15k</li>
-                    <li>Lemon: 10k / 15k</li>
-                    <li>Strawberry Mil: 12k / 15k</li>
-                </ul>
-            </div>
-
-            <!-- Es Kopi Susu -->
-            <div class="bg-white rounded-lg shadow-lg p-6 hover:scale-105 transition duration-300">
-                <h3 class="text-2xl text-center font-semibold text-teal-600 mb-4">Es Kopi Susu</h3>
-                <ul class="space-y-2 text-center text-gray-700">
-                    <li>Small: 10k / 15k</li>
-                    <li>Large: 20k / 25k</li>
-                </ul>
-            </div>
-        </div>
-    </section>
-
-
-    <section id="alamat" class="py-16 bg-gray-100">
-        <div class="text-center mb-12">
-            <h2 style="color: #c96822;" class="text-3xl font-bold  mb-8">Alamat Kami</h2>
-        </div>
-
-        <div class="flex justify-center">
-            <!-- Map Container -->
-            <div id="map" class="w-full h-96 md:h-128 lg:h-160 max-w-screen-lg"></div>
-        </div>
-    </section>
-
-    <!-- Kontak Section -->
-    <section id="kontak" class="h-screen bg-tea-background">
-        <div class="container mx-auto text-center mb-12">
-            <h2 class="text-3xl font-bold text-white mb-8">Kontak Kami</h2>
-        </div>
-        <div class="flex justify-center ">
-            <form action="#" method="post" class="w-full max-w-lg bg-white rounded-lg shadow-lg p-8">
-                <div class="mb-6">
-                    <label for="name" class="block text-gray-700 font-bold mb-2">Nama</label>
-                    <input type="text" id="name" name="name" required
-                        class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500">
-                </div>
-                <div class="mb-6">
-                    <label for="email" class="block text-gray-700 font-bold mb-2">Email</label>
-                    <input type="email" id="email" name="email" required
-                        class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500">
-                </div>
-                <div class="mb-6">
-                    <label for="message" class="block text-gray-700 font-bold mb-2">Pesan</label>
-                    <textarea id="message" name="message" rows="4" required
-                        class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"></textarea>
-                </div>
-                <button type="submit"
-                    class="w-full bg-tea-background hover:bg-teal-600 text-white font-bold py-3 rounded-lg transition duration-300">Kirim
-                    Pesan</button>
-            </form>
-        </div>
-    </section>
-
-    <div class="flex justify-center items center">
-        <div class="text-center">
-             <a href="https://www.instagram.com/chartea_selayar" target="_blank" class="text-white">
-                <i class="fab fa-instagram fa-lg"></i>
-        </div>
-    </div>
-    <!-- Include Leaflet JS -->
-    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            var map = L.map('map').setView([-6.1147023, 120.4601010], 18);
-              // Gaya default untuk GeoJSON
-            const defaultStyle1 = {
-                color: "#f0f0f0",
-                weight: 1.5,
-                opacity: 0.8,
-                fillColor: "#45F450",
-                fillOpacity: 1,
-            };
-
-            const defaultStyle2 = {
-                color: "#f0f0f0",
-                weight: 1.5,
-                opacity: 0.8,
-                fillColor: "#45F450",
-                fillOpacity: 1,
-            };
-            
-            const umkmData = {
-                name: "Coffea Shop Chartea",
-                rating: "4,4",
-                reviews: 5,
-                category: "Kedai Kopi",
-                buka: "---",
-                alamat: "jl.KH. Hayyung 92812",
-                phone: "--",
-                coords: [-6.1147023, 120.4601010],
-            };
-
-            const marker = L.marker(umkmData.coords).addTo(map);
-
-            // Menambahkan tooltip permanen pada marker
-            marker.bindTooltip(umkmData.name, {
-                permanent: true,
-                direction: "top",
-                className: "marker-tooltip",
-            });
-
-            marker.bindPopup(`
-                <div class="popup-container">
-                    <div class="popup-header">${umkmData.name}</div>
-                    <div class="popup-rating">⭐ ${umkmData.rating} <span>(${umkmData.reviews})</span></div>
-                    <div class="popup-category">${umkmData.category}</div>
-                    <div class="popup-address"><i class="fas fa-map-marker-alt">Alamat = </i> ${umkmData.alamat}</div>
-                    <div class="popup-contact"><i class="fas fa-phone-alt">Nomor Telepon = </i> ${umkmData.phone}</div>
-                    <div class="popup-contact"><i class="fas fa-phone-alt">Jam Buka = </i> ${umkmData.buka}</div>
-                </div>
-            `);
-
-           // Fungsi untuk memuat GeoJSON ke peta
-            function loadGeoJSON(url, styleOptions) {
-                fetch(url)
-                    .then(response => {
-                        if (!response.ok) {
-                            throw new Error(`Gagal memuat ${url}: ${response.status}`);
-                        }
-                        return response.json();
-                    })
-                    .then(geojsonData => {
-                        L.geoJSON(geojsonData, {
-                            style: styleOptions,
-                            onEachFeature: function (feature, layer) {
-                                if (feature.properties && feature.properties.nama) {
-                                    layer.bindPopup(`${feature.properties.nama}`);
-                                }
-                            },
-                        }).addTo(map);
-                    })
-                    .catch(error => console.error(`Kesalahan saat memuat ${url}:`, error));
-            }
-
-            // Memuat GeoJSON dengan gaya default
-            loadGeoJSON("./sekolah.geojson", defaultStyle1);
-            loadGeoJSON("./mesjid.geojson", defaultStyle2);
-
-            // GeoJSON dengan gaya khusus
-            const geojsonFiles = [
-                { url: "./BentengUtara.geojson", style: { color: "#f0f0f0", weight: 1.5, opacity: 0.8, fillColor: "red", fillOpacity: 0.2 } },
-                { url: "./BentengPusat.geojson", style: { color: "#f0f0f0", weight: 1.5, opacity: 0.8, fillColor: "yellow", fillOpacity: 0.2 } },
-                { url: "./BentengSelatan.geojson", style: { color: "#f0f0f0", weight: 1.5, opacity: 0.8, fillColor: "green", fillOpacity: 0.2 } },
-                { url: "./jalanBentengAnjay.geojson", style: { color: "#333", weight: 3, opacity: 1 } }
-            ];
-
-            // Memuat semua file GeoJSON dalam array
-            geojsonFiles.forEach(file => {
-                loadGeoJSON(file.url, file.style);
-            });
-
-            // Menambahkan kontrol layer (opsional)
-            const baseMaps = {
-                "OpenStreetMap": L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png')
-            };
-
-            const overlayMaps = {
-                "UMKM Marker": marker
-            };
-
-            L.control.layers(baseMaps, overlayMaps).addTo(map);
-        });
-    </script>
-
+    <!-- Footer -->
+    <footer class="bg-tea-background text-white text-center fixed bottom-0 w-full py-4">
+        <p>&copy; 2024 Coffea Shop Chartea. All Rights Reserved.</p>
+    </footer>
 </body>
 
 </html>
