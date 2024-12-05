@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coffea Shop Chartea</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Include Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Delius+Swash+Caps&family=Lacquer&family=Merienda:wght@300..900&display=swap');
+
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            font-family: "Lacquer", system-ui;
+        }
+
+        .bg-tea-background {
+            background: #8B4513;
+        }
+
+        #map {
+            height: 400px;
+            width: 100%;
+            z-index: 0;
+        }
+
+        .content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navbar -->
+    <nav class="bg-tea-background p-4 shadow-lg fixed top-0 w-full">
+        <div class="container mx-auto flex items-center justify-between">
+            <!-- Logo -->
+            <a href="#" class="text-white text-2xl font-bold">Coffea Shop Chartea</a>
+
+            <!-- Menu -->
+            <div class="hidden md:flex space-x-6">
+                <a href="./" class="text-white hover:text-gray-300 transition">Home</a>
+                <a href="./menu.html" class="text-white hover:text-gray-300 transition">Menu</a>
+                <a href="./alamat.html" class="text-white hover:text-gray-300 transition">Alamat</a>
+                <a href="./kontak.html" class="text-white hover:text-gray-300 transition">Kontak</a>
+            </div>
+
+            <!-- Mobile Menu Button -->
+            <button id="mobile-menu-button" class="md:hidden text-white focus:outline-none">
+                <i class="fas fa-bars fa-lg"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden flex flex-col bg-tea-background p-4 space-y-4">
+            <a href="./" class="text-white hover:text-gray-300 transition">Home</a>
+            <a href="./menu.html" class="text-white hover:text-gray-300 transition">Menu</a>
+            <a href="./alamat.html" class="text-white hover:text-gray-300 transition">Alamat</a>
+            <a href="./kontak.html" class="text-white hover:text-gray-300 transition">Kontak</a>
+        </div>
+    </nav>
+    <script>
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+    </script>
+
+    <!-- Main Content -->
+    <div class="content mt-10 mb-10">
+        <!-- Menu Section -->
+        <section id="menu" class="bg-white py-12 flex-1">
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 shadow gap-8 px-6">
+                <!-- Tea Series -->
+                <div class="bg-tea-background rounded-lg shadow-lg p-6 hover:scale-105 transition duration-300">
+                    <h3 class="text-2xl text-center font-semibold text-white mb-4">Tea Series</h3>
+                    <ul class="space-y-2 text-center text-white ">
+                        <li>Thaitea: 10k / 15k</li>
+                        <li>Greentea: 10k / 15k</li>
+                        <li>Thaitea Milo: 12k / 17k</li>
+                        <li>Matcha Tea: 10k / 15k</li>
+                    </ul>
+                </div>
+
+                <!-- Coffee Series -->
+                <div class="bg-tea-background rounded-lg shadow-lg p-6 hover:scale-105 transition duration-300">
+                    <h3 class="text-2xl text-center font-semibold text-white mb-4">Coffee Series</h3>
+                    <ul class="space-y-2 text-center text-white ">
+                        <li>Vanillalate: 10k / 15k</li>
+                        <li>Cappucino: 10k / 15k</li>
+                        <li>Moccacino: 10k / 15k</li>
+                        <li>Frappuccino: 13k / 18k</li>
+                        <li>Caramel Latte: 13k / 18k</li>
+                        <li>Caramel Macchiato: 13k / 18k</li>
+                    </ul>
+                </div>
+
+                <!-- Choco Series -->
+                <div class="bg-tea-background rounded-lg shadow-lg p-6 hover:scale-105 transition duration-300">
+                    <h3 class="text-2xl text-center font-semibold text-white mb-4">Choco Series</h3>
+                    <ul class="space-y-2 text-center text-white ">
+                        <li>Choco Dark: 10k / 15k</li>
+                        <li>Milo: 10k / 15k</li>
+                        <li>Milo Lava: 12k / 17k</li>
+                    </ul>
+                </div>
+
+                <!-- Bar -->
+                <div class="bg-tea-background rounded-lg shadow-lg p-6 hover:scale-105 transition duration-300">
+                    <h3 class="text-2xl text-center font-semibold text-white mb-4">Bar</h3>
+                    <ul class="space-y-2 text-center text-white ">
+                        <li>Hazelnut: 10k / 15k</li>
+                        <li>Orelnut: 10k / 15k</li>
+                        <li>Choco Belgian: 13k / 18k</li>
+                        <li>Choco Nutella: 15k / 20k</li>
+                        <li>Oreo Cookies: 13k / 18k</li>
+                    </ul>
+                </div>
+
+                <!-- Fruit Series -->
+                <div class="bg-tea-background rounded-lg shadow-lg p-6 hover:scale-105 transition duration-300">
+                    <h3 class="text-2xl text-center font-semibold text-white mb-4">Fruit Series</h3>
+                    <ul class="space-y-2 text-center text-white ">
+                        <li>Strawberry: 10k / 15k</li>
+                        <li>Mango: 13k / 18k</li>
+                        <li>Taro: 10k / 15k</li>
+                        <li>Lemon: 10k / 15k</li>
+                        <li>Strawberry Mil: 12k / 15k</li>
+                    </ul>
+                </div>
+
+                <!-- Es Kopi Susu -->
+                <div class="bg-tea-background rounded-lg shadow-lg p-6 hover:scale-105 transition duration-300">
+                    <h3 class="text-2xl text-center font-semibold text-white mb-4">Es Kopi Susu</h3>
+                    <ul class="space-y-2 text-center text-white ">
+                        <li>Small: 10k / 15k</li>
+                        <li>Large: 20k / 25k</li>
+                    </ul>
+                </div>
+                <!-- Tambahkan menu lain sesuai kebutuhan -->
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-tea-background text-white text-center fixed bottom-0 w-full py-4">
+        <p>&copy; 2024 Coffea Shop Chartea. All Rights Reserved.</p>
+    </footer>
+</body>
+
+</html>
