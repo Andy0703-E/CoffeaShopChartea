@@ -10,7 +10,7 @@
     <!-- Include Leaflet CSS -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
     <style>
-         @import url('https://fonts.googleapis.com/css2?family=Delius+Swash+Caps&family=Lacquer&family=Merienda&family=Noto+Serif+JP:wght@200..900&family=Pompiere&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Delius+Swash+Caps&family=Lacquer&family=Merienda&family=Noto+Serif+JP:wght@200..900&family=Pompiere&display=swap');
 
         body {
             font-family: "Noto Serif JP", serif;
@@ -81,82 +81,81 @@
         });
     </script>
 
-    <!-- Main Content -->
-    <div class="content mt-10 mb-10">
-        <!-- Menu Section -->
-        <section id="menu" class="bg-white py-12 flex-1">
-            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 shadow gap-8 px-6">
+    <section id="menu" class="bg-white py-12">
+        <div class="container mx-auto">
+            <br><br>
+            <h2 class="text-4xl font-bold text-center mb-10">Our Menu</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-8">
                 <!-- Tea Series -->
                 <div class="bg-tea-background rounded-lg shadow-lg p-6 hover:scale-105 transition duration-300">
                     <h3 class="text-2xl text-center font-semibold text-white mb-4">Tea Series</h3>
-                    <ul class="space-y-2 text-center text-white ">
-                        <li>Thaitea: 10k / 15k</li>
-                        <li>Greentea: 10k / 15k</li>
-                        <li>Thaitea Milo: 12k / 17k</li>
-                        <li>Matcha Tea: 10k / 15k</li>
+                    <ul class="space-y-4">
+                        <li class="flex items-center space-x-4">
+                            <img src="./thaitea.jpg" alt="Thaitea" class="w-12 h-12 rounded">
+                            <span class="text-white">Thaitea: 10k / 15k</span>
+                        </li>
+                        <li class="flex items-center space-x-4">
+                            <img src="./green.jpg" alt="Greentea" class="w-12 h-12 rounded">
+                            <span class="text-white">Greentea: 10k / 15k</span>
+                        </li>
+                        <li class="flex items-center space-x-4">
+                            <img src="./milo.jpg" alt="Thaitea Milo" class="w-12 h-12 rounded">
+                            <span class="text-white">Thaitea Milo: 12k / 17k</span>
+                        </li>
+                        <li class="flex items-center space-x-4">
+                            <img src="./macha.jpg" alt="Matcha Tea" class="w-12 h-12 rounded">
+                            <span class="text-white">Matcha Tea: 10k / 15k</span>
+                        </li>
                     </ul>
                 </div>
 
                 <!-- Coffee Series -->
                 <div class="bg-tea-background rounded-lg shadow-lg p-6 hover:scale-105 transition duration-300">
                     <h3 class="text-2xl text-center font-semibold text-white mb-4">Coffee Series</h3>
-                    <ul class="space-y-2 text-center text-white ">
-                        <li>Vanillalate: 10k / 15k</li>
-                        <li>Cappucino: 10k / 15k</li>
-                        <li>Moccacino: 10k / 15k</li>
-                        <li>Frappuccino: 13k / 18k</li>
-                        <li>Caramel Latte: 13k / 18k</li>
-                        <li>Caramel Macchiato: 13k / 18k</li>
+                    <ul class="space-y-4">
+                        <li class="flex items-center space-x-4">
+                            <img src="./IMG-20241210-WA0009.jpg" alt="Vanillalate" class="w-12 h-12 rounded">
+                            <span class="text-white">Vanillalate: 10k / 15k</span>
+                        </li>
+                        <li class="flex items-center space-x-4">
+                            <img src="./IMG-20241210-WA0011.jpg" alt="Cappucino" class="w-12 h-12 rounded">
+                            <span class="text-white">Cappucino: 10k / 15k</span>
+                        </li>
+                        <li class="flex items-center space-x-4">
+                            <img src="./IMG-20241210-WA0013.jpg" alt="Moccacino" class="w-12 h-12 rounded">
+                            <span class="text-white">Moccacino: 10k / 15k</span>
+                        </li>
+                        <li class="flex items-center space-x-4">
+                            <img src="./IMG-20241210-WA0014.jpg" alt="Frappuccino" class="w-12 h-12 rounded">
+                            <span class="text-white">Frappuccino: 13k / 18k</span>
+                        </li>
                     </ul>
                 </div>
 
                 <!-- Choco Series -->
                 <div class="bg-tea-background rounded-lg shadow-lg p-6 hover:scale-105 transition duration-300">
                     <h3 class="text-2xl text-center font-semibold text-white mb-4">Choco Series</h3>
-                    <ul class="space-y-2 text-center text-white ">
-                        <li>Choco Dark: 10k / 15k</li>
-                        <li>Milo: 10k / 15k</li>
-                        <li>Milo Lava: 12k / 17k</li>
+                    <ul class="space-y-4">
+                        <li class="flex items-center space-x-4">
+                            <img src="./choco.jpg" alt="Choco Dark" class="w-12 h-12 rounded">
+                            <span class="text-white">Choco Dark: 10k / 15k</span>
+                        </li>
+                        <li class="flex items-center space-x-4">
+                            <img src="./milo.jpg" alt="Milo" class="w-12 h-12 rounded">
+                            <span class="text-white">Milo: 10k / 15k</span>
+                        </li>
+                        <li class="flex items-center space-x-4">
+                            <img src="./choco.jpg" alt="Milo Lava" class="w-12 h-12 rounded">
+                            <span class="text-white">Milo Lava: 12k / 17k</span>
+                        </li>
                     </ul>
                 </div>
-
-                <!-- Bar -->
-                <div class="bg-tea-background rounded-lg shadow-lg p-6 hover:scale-105 transition duration-300">
-                    <h3 class="text-2xl text-center font-semibold text-white mb-4">Bar</h3>
-                    <ul class="space-y-2 text-center text-white ">
-                        <li>Hazelnut: 10k / 15k</li>
-                        <li>Orelnut: 10k / 15k</li>
-                        <li>Choco Belgian: 13k / 18k</li>
-                        <li>Choco Nutella: 15k / 20k</li>
-                        <li>Oreo Cookies: 13k / 18k</li>
-                    </ul>
-                </div>
-
-                <!-- Fruit Series -->
-                <div class="bg-tea-background rounded-lg shadow-lg p-6 hover:scale-105 transition duration-300">
-                    <h3 class="text-2xl text-center font-semibold text-white mb-4">Fruit Series</h3>
-                    <ul class="space-y-2 text-center text-white ">
-                        <li>Strawberry: 10k / 15k</li>
-                        <li>Mango: 13k / 18k</li>
-                        <li>Taro: 10k / 15k</li>
-                        <li>Lemon: 10k / 15k</li>
-                        <li>Strawberry Mil: 12k / 15k</li>
-                    </ul>
-                </div>
-
-                <!-- Es Kopi Susu -->
-                <div class="bg-tea-background rounded-lg shadow-lg p-6 hover:scale-105 transition duration-300">
-                    <h3 class="text-2xl text-center font-semibold text-white mb-4">Es Kopi Susu</h3>
-                    <ul class="space-y-2 text-center text-white ">
-                        <li>Small: 10k / 15k</li>
-                        <li>Large: 20k / 25k</li>
-                    </ul>
-                </div>
-                <!-- Tambahkan menu lain sesuai kebutuhan -->
             </div>
-        </section>
-    </div>
+        </div>
+    </section>
 
+    </div>
+    <br><br>
     <!-- Footer -->
     <footer class="bg-tea-background text-white text-center fixed bottom-0 w-full py-4">
         <p>&copy; 2024 Coffea Shop Chartea. All Rights Reserved.</p>
